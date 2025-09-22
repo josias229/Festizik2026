@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nom de l'artiste - Festizik</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="artiste-detail-page">
+    <!-- Barre de navigation -->
+    <nav>
+        <div class="logo">
+            <img src="/images/CTN_BBQ_H2.png" alt="Festizik Logo" width="150">
+        </div>
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Le Festival</a></li>
+            <li><a href="programme.html">Programme</a></li>
+            <li><a href="#">Exposants</a></li>
+            <li><a href="#">Instants+</a></li>
+            <li><a href="#">Festishop</a></li>
+            <li><a href="#" class="ticket-btn"><i class="fas fa-ticket-alt ticket-icon"></i> Billetterie</a></li>
+        </ul>
+    </nav>
+
+    <!-- Section détail artiste -->
+    <section class="artiste-detail-section">
+        <div class="container">
+            <div class="artiste-header">
+                <div class="artiste-image">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Le Klown">
+                </div>
+                <div class="artiste-info">
+                    <h1 class="artiste-name">Le Klown</h1>
+                    <div class="artiste-genre">Electro • Hip-Hop • Expérimental</div>
+                    <div class="artiste-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Dimanche 06 juillet</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>22h00 - 23h30</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>CTRL+B STAGE</span>
+                        </div>
+                    </div>
+                    <div class="artiste-actions">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-heart"></i> Ajouter à mes favoris
+                        </button>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-share-alt"></i> Partager
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="artiste-content">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="artiste-bio">
+                            <h2>Biographie</h2>
+                            <p>Le Klown est un artiste éclectique qui mélange avec brio les sonorités électro, hip-hop et expérimentales. Originaire de Cotonou, il a su se créer une identité unique dans la scène musicale béninoise avec ses performances énergiques et son style visuel distinctif.</p>
+                            <p>Depuis ses débuts en 2018, Le Klown a participé à de nombreux festivals et partagé la scène avec des artistes internationaux. Son dernier EP "Masque et Paradoxe" a été acclamé par la critique pour son innovation et son audace musicale.</p>
+                        </div>
+
+                        <div class="artiste-media">
+                            <h2>Médias</h2>
+                            <div class="media-gallery">
+                                <div class="media-item">
+                                    <img src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?auto=format&fit=crop&w=400&q=80" alt="Le Klown en concert">
+                                </div>
+                                <div class="media-item">
+                                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=400&q=80" alt="Le Klown en studio">
+                                </div>
+                                <div class="media-item">
+                                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=400&q=80" alt="Performance scénique">
+                                </div>
+                                <div class="media-item">
+                                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=400&q=80" alt="Performance scénique">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="artiste-sidebar">
+                            <div class="sidebar-card">
+                                <h3>Prochaines performances</h3>
+                                <ul class="performance-list">
+                                    <li>
+                                        <div class="performance-date">06 Juillet 2025</div>
+                                        <div class="performance-location">Festizik, Cotonou</div>
+                                    </li>
+                                    <li>
+                                        <div class="performance-date">15 Juillet 2025</div>
+                                        <div class="performance-location">Festival des Arts, Porto-Novo</div>
+                                    </li>
+                                    <li>
+                                        <div class="performance-date">28 Juillet 2025</div>
+                                        <div class="performance-location">Club Electrique, Lomé</div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="sidebar-card">
+                                <h3>Réseaux sociaux</h3>
+                                <div class="social-links">
+                                    <a href="#" class="social-link"><i class="fab fa-spotify"></i></a>
+                                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="social-link"><i class="fab fa-soundcloud"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="sidebar-card">
+                                <h3>Écouter</h3>
+                                <div class="music-player">
+                                    <div class="track">
+                                        <div class="track-info">
+                                            <div class="track-title">Masque et Paradoxe</div>
+                                            <div class="track-album">Single (2024)</div>
+                                        </div>
+                                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                                    </div>
+                                    <div class="track">
+                                        <div class="track-info">
+                                            <div class="track-title">Rire Électrique</div>
+                                            <div class="track-album">EP Circus (2023)</div>
+                                        </div>
+                                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="festizik-footer">
+        <div class="footer-content">
+            <!-- Section principale du footer -->
+            <div class="footer-main">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/images/CTN_BBQ_P1.png" alt="Festizik Logo" width="150">
+                    </div>
+                    <p class="footer-description">
+                        Festizik - 10 ans de passion, de saveurs et de vibrations à Cotonou. Rejoignez-nous pour une
+                        expérience culinaire et musicale inoubliable.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Le Festival</a></li>
+                        <li><a href="#">Programme</a></li>
+                        <li><a href="#">Billetterie</a></li>
+                        <li><a href="#">Exposants</a></li>
+                        <li><a href="#">Plan du site</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Édition 2025-2026</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Artistes</a></li>
+                        <li><a href="#">Instants+</a></li>
+                        <li><a href="#">Festishop</a></li>
+                        <li><a href="#">Espace Presse</a></li>
+                        <li><a href="#">Devenir Partenaire</a></li>
+                        <li><a href="#">Devenir Bénévole</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact & Infos</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Plage de Fidjrossè, Cotonou, Bénin</p>
+                        <p><i class="fas fa-phone"></i> +229 XX XX XX XX</p>
+                        <p><i class="fas fa-envelope"></i> info@festizik.com</p>
+                    </div>
+
+                    <div class="newsletter">
+                        <h4>Newsletter</h4>
+                        <p>Restez informé des dernières actualités</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Votre email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section de bas de footer -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Festizik Cotonou BBQ. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="#">Politique de confidentialité</a>
+                        <a href="#">Conditions d'utilisation</a>
+                        <a href="#">Mentions légales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Chatbot amélioré -->
+    <div class="chatbot-container">
+        <div class="chatbot-button" id="chatbotButton">
+            <i class="fas fa-comments"></i>
+            <div class="notification-badge" id="notificationBadge" style="display: none;">1</div>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3><span class="status-indicator"></span> Assistant Festizik</h3>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Bonjour ! 👋 Je suis l'assistant Festizik. Comment puis-je vous aider aujourd'hui ?
+                    <span class="message-time">Maintenant</span>
+                    <div class="quick-replies">
+                        <div class="quick-reply" data-reply="Dates et horaires">Dates et horaires</div>
+                        <div class="quick-reply" data-reply="Billetterie">Billetterie</div>
+                        <div class="quick-reply" data-reply="Programme">Programme</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Tapez votre message...">
+                <button id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

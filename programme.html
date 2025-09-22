@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festizik - Programme 2025-2026</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
+ <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="programme-page">
+    <!-- Barre de navigation transformable -->
+    <nav>
+        <div class="logo">
+            <!-- FESTI<span>ZIK</span> -->
+            <img src="/images/CTN_BBQ_H2.png" alt="Festizik Logo" width="150">
+        </div>
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Le Festival</a></li>
+            <li><a href="programme.html" class="active">Programme</a></li>
+            <li><a href="#">Exposants</a></li>
+            <li><a href="#">Instants+</a></li>
+            <li><a href="#">Festishop</a></li>
+            <li><a href="#" class="ticket-btn"><i class="fas fa-ticket-alt ticket-icon"></i> Billetterie</a></li>
+        </ul>
+    </nav>
+
+    <!-- Section Programme -->
+    <section class="programme-section">
+        <div class="container">
+            <h2 class="section-title">Programme <span>Artistes</span></h2>
+            
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-category="all">Tous</button>
+                <button class="filter-tab" data-category="vendredi">Vendredi</button>
+                <button class="filter-tab" data-category="samedi">Samedi</button>
+                <button class="filter-tab" data-category="dimanche">Dimanche</button>
+            </div>
+
+            <div class="artist-grid">
+                <!-- Card 1 -->
+                <article class="artist-card" aria-label="Le Klown — Dimanche 06 juillet — CTRL+B Stage">
+                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <a href="artiste-detail.html" class="card-link"></a>
+                    <div class="meta">
+                        <h3 class="artist-name">Le Klown</h3>
+                        <div class="artist-meta-line">Dimanche 06 juillet</div>
+                        <div class="artist-sub">CTRL+B STAGE</div>
+                    </div>
+                </article>
+            
+                <!-- Card 2 -->
+                <article class="artist-card" aria-label="Lekid — Samedi 05 juillet — Barrio Havana Stage">
+                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1580894908361-5691b410f0f7?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <a href="artiste-detail.html" class="card-link"></a>
+                    <div class="meta">
+                        <h3 class="artist-name">Lekid</h3>
+                        <div class="artist-meta-line">Samedi 05 juillet</div>
+                        <div class="artist-sub">BARRIO HAVANA STAGE</div>
+                    </div>
+                </article>
+            
+                <!-- Card 3 -->
+                <article class="artist-card" aria-label="Lenna FR — Dimanche 06 juillet — Barrio Havana Stage">
+                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <a href="artiste-detail.html" class="card-link"></a>
+                    <div class="meta">
+                        <h3 class="artist-name">Lenna FR</h3>
+                        <div class="artist-meta-line">Dimanche 06 juillet</div>
+                        <div class="artist-sub">BARRIO HAVANA STAGE</div>
+                    </div>
+                </article>
+            
+                <!-- Card 4 -->
+                <article class="artist-card" aria-label="Artiste 4 — Vendredi 04 juillet — Main Stage">
+                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <a href="artiste-detail.html" class="card-link"></a>
+                    <div class="meta">
+                        <h3 class="artist-name">Artiste 4</h3>
+                        <div class="artist-meta-line">Vendredi 04 juillet</div>
+                        <div class="artist-sub">MAIN STAGE</div>
+                    </div>
+                </article>
+            
+                <!-- Card 5 -->
+                <article class="artist-card" aria-label="Artiste 5 — Jeudi 03 juillet — Side Stage">
+                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <a href="artiste-detail.html" class="card-link"></a>
+                    <div class="meta">
+                        <h3 class="artist-name">Artiste 5</h3>
+                        <div class="artist-meta-line">Jeudi 03 juillet</div>
+                        <div class="artist-sub">SIDE STAGE</div>
+                    </div>
+                </article>
+            
+                <!-- Card 6 -->
+                <article class="artist-card" aria-label="Artiste 6 — Mercredi 02 juillet — Club Stage">
+                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <a href="artiste-detail.html" class="card-link"></a>
+                    <div class="meta">
+                        <h3 class="artist-name">Artiste 6</h3>
+                        <div class="artist-meta-line">Mercredi 02 juillet</div>
+                        <div class="artist-sub">CLUB STAGE</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="festizik-footer">
+        <div class="footer-content">
+            <!-- Section principale du footer -->
+            <div class="footer-main">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/images/CTN_BBQ_P1.png" alt="Festizik Logo" width="150">
+                    </div>
+                    <p class="footer-description">
+                        Festizik - 10 ans de passion, de saveurs et de vibrations à Cotonou. Rejoignez-nous pour une
+                        expérience culinaire et musicale inoubliable.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="#">Le Festival</a></li>
+                        <li><a href="programme.html">Programme</a></li>
+                        <li><a href="#">Billetterie</a></li>
+                        <li><a href="#">Exposants</a></li>
+                        <li><a href="#">Plan du site</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Édition 2025-2026</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Artistes</a></li>
+                        <li><a href="#">Instants+</a></li>
+                        <li><a href="#">Festishop</a></li>
+                        <li><a href="#">Espace Presse</a></li>
+                        <li><a href="#">Devenir Partenaire</a></li>
+                        <li><a href="#">Devenir Bénévole</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact & Infos</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Plage de Fidjrossè, Cotonou, Bénin</p>
+                        <p><i class="fas fa-phone"></i> +229 XX XX XX XX</p>
+                        <p><i class="fas fa-envelope"></i> info@festizik.com</p>
+                    </div>
+
+                    <div class="newsletter">
+                        <h4>Newsletter</h4>
+                        <p>Restez informé des dernières actualités</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Votre email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section de bas de footer -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Festizik Cotonou BBQ. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="#">Politique de confidentialité</a>
+                        <a href="#">Conditions d'utilisation</a>
+                        <a href="#">Mentions légales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+     <!-- Chatbot amélioré -->
+     <div class="chatbot-container">
+        <div class="chatbot-button" id="chatbotButton">
+            <i class="fas fa-comments"></i>
+            <div class="notification-badge" id="notificationBadge" style="display: none;">1</div>
+        </div>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3><span class="status-indicator"></span> Assistant Festizik</h3>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Bonjour ! 👋 Je suis l'assistant Festizik. Comment puis-je vous aider aujourd'hui ?
+                    <span class="message-time">Maintenant</span>
+                    <div class="quick-replies">
+                        <div class="quick-reply" data-reply="Dates et horaires">Dates et horaires</div>
+                        <div class="quick-reply" data-reply="Billetterie">Billetterie</div>
+                        <div class="quick-reply" data-reply="Programme">Programme</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Tapez votre message...">
+                <button id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+    <script src="script.js" ></script>
+</body>
+
+</html>

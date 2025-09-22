@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page en cours d'édition - Festizik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== STYLES GÉNÉRAUX ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            color: #333;
+            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* ===== CONTAINER PRINCIPAL ===== */
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            padding: 50px 40px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 123, 0, 0.1),
+                rgba(255, 123, 0, 0)
+            );
+            transform: rotate(30deg);
+            z-index: 0;
+        }
+
+        /* ===== CONTENU ===== */
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .icon-container {
+            margin-bottom: 30px;
+        }
+
+        .icon {
+            font-size: 80px;
+            color: #FF7B00;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* ===== CARROUSEL DE CITATIONS ===== */
+        .quote-carousel {
+            background: rgba(255, 123, 0, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            border: 1px solid rgba(255, 123, 0, 0.2);
+        }
+
+        .quote {
+            font-size: 1.4rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: #f3e7d1;
+            display: none;
+            animation: fadeIn 1.5s;
+        }
+
+        .quote.active {
+            display: block;
+        }
+
+        .author {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #FF7B00;
+            font-style: normal;
+        }
+
+        /* ===== BARRE DE PROGRESSION ===== */
+        .progress-container {
+            height: 8px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 40px 0 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #FF7B00, #FF5500);
+            border-radius: 4px;
+            animation: progress 3s infinite;
+        }
+
+        .status {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+
+        /* ===== BOUTON ACCUEIL ===== */
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FF7B00 0%, #FF5500 100%);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 123, 0, 0.4);
+            border: none;
+            cursor: pointer;
+            gap: 10px;
+        }
+
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 123, 0, 0.6);
+        }
+
+        .home-button:active {
+            transform: translateY(0);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes progress {
+            0% {
+                width: 0%;
+            }
+            50% {
+                width: 60%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .quote {
+                font-size: 1.2rem;
+            }
+            
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .home-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .icon {
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="icon-container">
+                <i class="fas fa-tools icon"></i>
+            </div>
+            
+            <h1>Page en cours d'édition</h1>
+            
+            <p class="subtitle">Notre équipe travaille dur pour vous préparer une expérience exceptionnelle. Revenez bientôt pour découvrir du contenu exclusif!</p>
+            
+            <div class="quote-carousel">
+                <div class="quote active">
+                    "La perfection est atteinte, non pas lorsqu'il n'y a plus rien à ajouter, mais lorsqu'il n'y a plus rien à retirer."
+                    <span class="author">- Antoine de Saint-Exupéry</span>
+                </div>
+                <div class="quote">
+                    "Le travail accompli avec passion mène toujours à de meilleurs résultats."
+                    <span class="author">- Anonyme</span>
+                </div>
+                <div class="quote">
+                    "Patience et persévérance sont les clés de toute réalisation valable."
+                    <span class="author">- Proverbe français</span>
+                </div>
+                <div class="quote">
+                    "La simplicité est la sophistication suprême."
+                    <span class="author">- Léonard de Vinci</span>
+                </div>
+            </div>
+            
+            <!-- <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div> -->
+            
+            <p class="status">Nous travaillons dur pour vous offrir la meilleure expérience possible. Merci de votre patience!</p>
+            
+            <button class="home-button" onclick="window.location.href='#'">
+                <i class="fas fa-home"></i> Revenir à l'accueil
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Carrousel de citations
+        const quotes = document.querySelectorAll('.quote');
+        let currentQuote = 0;
+        
+        function showNextQuote() {
+            quotes[currentQuote].classList.remove('active');
+            
+            currentQuote = (currentQuote + 1) % quotes.length;
+            
+            quotes[currentQuote].classList.add('active');
+        }
+        
+        // Changer de citation toutes les 5 secondes
+        setInterval(showNextQuote, 5000);
+    </script>
+</body>
+</html>

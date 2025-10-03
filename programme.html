@@ -36,87 +36,178 @@
         </ul>
     </nav>
 
-    <!-- Section Programme -->
-    <section class="programme-section">
-        <div class="container">
-            <h2 class="section-title">Programme <span>Artistes</span></h2>
-            
-            <div class="filter-tabs">
-                <button class="filter-tab active" data-category="all">Tous</button>
-                <button class="filter-tab" data-category="vendredi">Vendredi</button>
-                <button class="filter-tab" data-category="samedi">Samedi</button>
-                <button class="filter-tab" data-category="dimanche">Dimanche</button>
-            </div>
-
-            <div class="artist-grid">
-                <!-- Card 1 -->
-                <article class="artist-card" aria-label="Le Klown — Dimanche 06 juillet — CTRL+B Stage">
-                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80');"></div>
-                    <a href="artiste-detail.html" class="card-link"></a>
-                    <div class="meta">
-                        <h3 class="artist-name">Le Klown</h3>
-                        <div class="artist-meta-line">Dimanche 06 juillet</div>
-                        <div class="artist-sub">CTRL+B STAGE</div>
-                    </div>
-                </article>
-            
-                <!-- Card 2 -->
-                <article class="artist-card" aria-label="Lekid — Samedi 05 juillet — Barrio Havana Stage">
-                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1580894908361-5691b410f0f7?auto=format&fit=crop&w=1200&q=80');"></div>
-                    <a href="artiste-detail.html" class="card-link"></a>
-                    <div class="meta">
-                        <h3 class="artist-name">Lekid</h3>
-                        <div class="artist-meta-line">Samedi 05 juillet</div>
-                        <div class="artist-sub">BARRIO HAVANA STAGE</div>
-                    </div>
-                </article>
-            
-                <!-- Card 3 -->
-                <article class="artist-card" aria-label="Lenna FR — Dimanche 06 juillet — Barrio Havana Stage">
-                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80');"></div>
-                    <a href="artiste-detail.html" class="card-link"></a>
-                    <div class="meta">
-                        <h3 class="artist-name">Lenna FR</h3>
-                        <div class="artist-meta-line">Dimanche 06 juillet</div>
-                        <div class="artist-sub">BARRIO HAVANA STAGE</div>
-                    </div>
-                </article>
-            
-                <!-- Card 4 -->
-                <article class="artist-card" aria-label="Artiste 4 — Vendredi 04 juillet — Main Stage">
-                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=80');"></div>
-                    <a href="artiste-detail.html" class="card-link"></a>
-                    <div class="meta">
-                        <h3 class="artist-name">Artiste 4</h3>
-                        <div class="artist-meta-line">Vendredi 04 juillet</div>
-                        <div class="artist-sub">MAIN STAGE</div>
-                    </div>
-                </article>
-            
-                <!-- Card 5 -->
-                <article class="artist-card" aria-label="Artiste 5 — Jeudi 03 juillet — Side Stage">
-                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80');"></div>
-                    <a href="artiste-detail.html" class="card-link"></a>
-                    <div class="meta">
-                        <h3 class="artist-name">Artiste 5</h3>
-                        <div class="artist-meta-line">Jeudi 03 juillet</div>
-                        <div class="artist-sub">SIDE STAGE</div>
-                    </div>
-                </article>
-            
-                <!-- Card 6 -->
-                <article class="artist-card" aria-label="Artiste 6 — Mercredi 02 juillet — Club Stage">
-                    <div class="media" style="background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80');"></div>
-                    <a href="artiste-detail.html" class="card-link"></a>
-                    <div class="meta">
-                        <h3 class="artist-name">Artiste 6</h3>
-                        <div class="artist-meta-line">Mercredi 02 juillet</div>
-                        <div class="artist-sub">CLUB STAGE</div>
-                    </div>
-                </article>
-            </div>
+   <!-- Section Programme -->
+<section class="programme-section">
+    <div class="container">
+        <h2 class="section-title">Programme <span>Festizik 2026</span></h2>
+        <p class="section-subtitle">Découvrez l'univers complet du festival : artistes, activités culturelles et expériences uniques</p>
+        
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-category="all">Tout Voir</button>
+            <button class="filter-tab" data-category="artistes">Artistes</button>
+            <button class="filter-tab" data-category="activites">Activités Culturelles</button>
+            <button class="filter-tab" data-category="vendredi">Vendredi</button>
+            <button class="filter-tab" data-category="samedi">Samedi</button>
+            <button class="filter-tab" data-category="dimanche">Dimanche</button>
         </div>
-    </section>
+
+        <div class="programme-grid">
+            <!-- ARTISTES -->
+            
+            <!-- Card 1 -->
+            <article class="programme-card artiste" data-category="artistes vendredi" aria-label="Le Klown — Vendredi 23 juillet — Main Stage">
+                <div class="card-badge artiste-badge">
+                    <i class="fas fa-music"></i> Artiste
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Le Klown</h3>
+                    <div class="programme-meta-line">Vendredi 23 juillet • 21h00</div>
+                    <div class="programme-sub">MAIN STAGE • CONCERT</div>
+                    <div class="programme-description">Performance électrisante du roi de l'afrobeat</div>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="programme-card artiste" data-category="artistes samedi" aria-label="Lekid — Samedi 24 juillet — Barrio Havana Stage">
+                <div class="card-badge artiste-badge">
+                    <i class="fas fa-music"></i> Artiste
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1580894908361-5691b410f0f7?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Lekid</h3>
+                    <div class="programme-meta-line">Samedi 24 juillet • 20h30</div>
+                    <div class="programme-sub">BARRIO HAVANA STAGE • RAP</div>
+                    <div class="programme-description">Flow unique et textes percutants</div>
+                </div>
+            </article>
+
+            <!-- ACTIVITÉS CULTURELLES -->
+            
+            <!-- Challenge Cuisine -->
+            <article class="programme-card activite" data-category="activites samedi" aria-label="Challenge Cuisine Festivalier — Samedi 24 juillet — Food Court">
+                <div class="card-badge activite-badge">
+                    <i class="fas fa-utensils"></i> Activité
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Challenge Cuisine Festivalier</h3>
+                    <div class="programme-meta-line">Samedi 24 juillet • 15h00</div>
+                    <div class="programme-sub">FOOD COURT • COMPÉTITION</div>
+                    <div class="programme-description">Montrez vos talents culinaires et remportez des prix exceptionnels</div>
+                </div>
+            </article>
+
+            <!-- Battles Chorégraphie -->
+            <article class="programme-card activite" data-category="activites vendredi" aria-label="Battles Chorégraphie — Vendredi 23 juillet — Dance Zone">
+                <div class="card-badge activite-badge">
+                    <i class="fas fa-dice-d6"></i> Battle
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Battles Chorégraphie & Rap</h3>
+                    <div class="programme-meta-line">Vendredi 23 juillet • 18h00</div>
+                    <div class="programme-sub">DANCE ZONE • COMPÉTITION</div>
+                    <div class="programme-description">Affrontements épiques entre danseurs et rappeurs</div>
+                </div>
+            </article>
+
+            <!-- Barbecue Birthday -->
+            <article class="programme-card activite" data-category="activites dimanche" aria-label="Barbecue Birthday — Dimanche 25 juillet — BBQ Village">
+                <div class="card-badge activite-badge">
+                    <i class="fas fa-birthday-cake"></i> Événement
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Barbecue Birthday</h3>
+                    <div class="programme-meta-line">Dimanche 25 juillet • 16h00</div>
+                    <div class="programme-sub">BBQ VILLAGE • CÉLÉBRATION</div>
+                    <div class="programme-description">Célébrez l'anniversaire du festival en grand !</div>
+                </div>
+            </article>
+
+            <!-- Partenaire's Days -->
+            <article class="programme-card activite" data-category="activites samedi dimanche" aria-label="Partenaire's Days — Samedi & Dimanche — Village Partenaires">
+                <div class="card-badge activite-badge">
+                    <i class="fas fa-handshake"></i> Partenariat
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1551833086-7c5c6a81d1c1?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Partenaire's Days</h3>
+                    <div class="programme-meta-line">Samedi & Dimanche • Toute la journée</div>
+                    <div class="programme-sub">VILLAGE PARTENAIRES • NETWORKING</div>
+                    <div class="programme-description">Découvertes exclusives et goodies des partenaires</div>
+                </div>
+            </article>
+
+            <!-- Games Zone -->
+            <article class="programme-card activite" data-category="activites vendredi samedi dimanche" aria-label="Games Zone — Tout le weekend — Zone Jeux">
+                <div class="card-badge activite-badge">
+                    <i class="fas fa-gamepad"></i> Jeux
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Games Zone</h3>
+                    <div class="programme-meta-line">Vendredi à Dimanche • 14h-22h</div>
+                    <div class="programme-sub">ZONE JEUX • DIVERTISSEMENT</div>
+                    <div class="programme-description">Espace gaming et compétitions avec lots à gagner</div>
+                </div>
+            </article>
+
+            <!-- Voyage Sonore -->
+            <article class="programme-card activite" data-category="activites vendredi" aria-label="Voyage Sonore — Vendredi 23 juillet — Sound Lab">
+                <div class="card-badge activite-badge">
+                    <i class="fas fa-headphones"></i> Expérience
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Voyage Sonore</h3>
+                    <div class="programme-meta-line">Vendredi 23 juillet • 19h30</div>
+                    <div class="programme-sub">SOUND LAB • IMMERSION</div>
+                    <div class="programme-description">Expérience audio immersive et sensorielle unique</div>
+                </div>
+            </article>
+
+            <!-- Coffret Social -->
+            <article class="programme-card activite" data-category="activites dimanche" aria-label="Coffret Social — Dimanche 25 juillet — Social Hub">
+                <div class="card-badge activite-badge">
+                    <i class="fas fa-users"></i> Social
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Coffret Social</h3>
+                    <div class="programme-meta-line">Dimanche 25 juillet • 17h00</div>
+                    <div class="programme-sub">SOCIAL HUB • RENCONTRE</div>
+                    <div class="programme-description">Espace de networking et création de contenu social</div>
+                </div>
+            </article>
+
+            <!-- Artiste 3 -->
+            <article class="programme-card artiste" data-category="artistes dimanche" aria-label="Lenna FR — Dimanche 25 juillet — Barrio Havana Stage">
+                <div class="card-badge artiste-badge">
+                    <i class="fas fa-music"></i> Artiste
+                </div>
+                <div class="media" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80');"></div>
+                <a href="artiste-detail.html" class="card-link"></a>
+                <div class="meta">
+                    <h3 class="programme-name">Lenna FR</h3>
+                    <div class="programme-meta-line">Dimanche 25 juillet • 22h00</div>
+                    <div class="programme-sub">BARRIO HAVANA STAGE • R&B</div>
+                    <div class="programme-description">Voix envoûtante et mélodies captivantes</div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="festizik-footer">

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Exposants — Exemple</title>
+<style>
+  :root{--bg:#083246;--card:#f4a87a;--accent:#e6452b;--muted:#f0f0f3;--glass:rgba(255,255,255,0.06)}
+  body{margin:0;font-family:Inter, system-ui, Arial; background:linear-gradient(#052434, #0b394c); color:#fff; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:32px auto;padding:0 20px;}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  header h1{font-size:20px;margin:0}
+  /* categories */
+  .cats{display:flex;gap:18px;overflow-x:auto;padding:18px 4px;margin-bottom:28px}
+  .cat{min-width:180px;flex:0 0 auto;background:var(--glass);padding:22px;border-radius:4px;text-align:center;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,0.12)}
+  .cat .icon{font-size:34px;margin-bottom:10px;opacity:0.95}
+  .cat h3{margin:6px 0 8px;font-size:18px;letter-spacing:0.6px}
+  .count{font-size:13px;color:#d6e6ef;opacity:0.9}
+  /* controls */
+  .controls{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+  .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:6px;border:0;cursor:pointer}
+  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.08)}
+  /* gallery */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+  .card{background:var(--glass);padding:14px;border-radius:6px;display:flex;gap:12px;align-items:center}
+  .thumb{width:64px;height:64px;border-radius:8px;background:#cfcfcf;flex:0 0 64px;display:flex;align-items:center;justify-content:center;color:#102; font-weight:700}
+  .meta h4{margin:0 0 6px;font-size:16px}
+  .meta p{margin:0;font-size:13px;color:#d6e6ef;opacity:0.9}
+  .links{margin-top:8px;display:flex;gap:8px}
+  .chip{font-size:12px;padding:6px 8px;border-radius:6px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.03)}
+  /* modal */
+  .modal-back{position:fixed;inset:0;background:rgba(2,8,12,0.6);display:none;align-items:center;justify-content:center;padding:20px}
+  .modal{background:#fff;color:#0b2630;padding:18px;border-radius:8px;max-width:520px;width:100%}
+  .modal h3{margin:0 0 10px}
+  label{display:block;font-size:13px;margin-top:10px;color:#0b2630}
+  input,select,textarea{width:100%;padding:10px;margin-top:6px;border-radius:6px;border:1px solid #e2e8ee;font-size:14px}
+  .row{display:flex;gap:10px}
+  .row .col{flex:1}
+  .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+  .hidden{display:none}
+  /* responsive */
+  @media (max-width:520px){.cats{gap:12px}.cat{min-width:150px;padding:16px}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Page Exposants — Réservation & Découverte</h1>
+      <div style="font-size:13px;color:#bfe0f0">Priorité action: réservation en haut</div>
+    </header>
+
+    <!-- Catégories (prioritaires) -->
+    <section>
+      <div class="cats" id="categories"></div>
+    </section>
+
+    <div class="controls">
+      <button class="btn secondary" id="showAll">Voir tous les exposants</button>
+      <div style="margin-left:auto;color:#d6e6ef;font-size:13px" id="statusInfo"></div>
+    </div>
+
+    <!-- Galerie exposants -->
+    <section>
+      <div class="grid" id="gallery"></div>
+    </section>
+  </div>
+
+  <!-- Modal réservation -->
+  <div class="modal-back" id="modal">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h3 id="modalTitle">Réserver un stand</h3>
+      <form id="formReservation">
+        <label>Catégorie</label>
+        <input type="text" id="fCategory" readonly />
+        <label>Nom de l'exposant</label>
+        <input id="fName" required />
+        <div class="row">
+          <div class="col">
+            <label>Téléphone / WhatsApp</label>
+            <input id="fPhone" />
+          </div>
+          <div class="col">
+            <label>Réseau / site</label>
+            <input id="fLink" placeholder="Facebook, Instagram, site..." />
+          </div>
+        </div>
+        <label>Brève description</label>
+        <textarea id="fDesc" rows="3" placeholder="Ex: Vente de beignets et jus fraichement préparés"></textarea>
+
+        <div class="modal-footer">
+          <button type="button" class="btn secondary" id="cancelBtn">Annuler</button>
+          <button class="btn" type="submit">Réserver</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script>
+/*
+ Exemple fonctionnel:
+ - Clic sur une catégorie ouvre modal de réservation
+ - Filtrer la galerie par catégorie
+ - Valider le formulaire ajoute un exposant et met à jour les compteurs
+*/
+
+// données exemples
+const exhibitors = [
+  {id:1,name:'Mama Juice',cat:'Jus de fruit',desc:'Jus frais pressés',link:'@mamajuice'},
+  {id:2,name:'Le Comptoir',cat:'Restaurant',desc:'Cuisine locale',link:'@lecomptoir'},
+  {id:3,name:'Douceur',cat:'Dessert',desc:'Gâteaux et glaces',link:'@douceur'},
+  {id:4,name:'Boutique K',cat:'Boutique',desc:'Accessoires artisanaux',link:'@boutiquek'},
+  {id:5,name:'Grill & Co',cat:'Hors-grillade',desc:'Brochettes et grillades',link:'@grillco'},
+];
+
+const categoriesList = [
+  {key:'Boutique', icon:'🛍️'},
+  {key:'Restaurant', icon:'🍽️'},
+  {key:'Jus de fruit', icon:'🥤'},
+  {key:'Hors-grillade', icon:'🍕'},
+  {key:'Dessert', icon:'🍨'}
+];
+
+const catsEl = document.getElementById('categories');
+const galleryEl = document.getElementById('gallery');
+const statusInfo = document.getElementById('statusInfo');
+const modal = document.getElementById('modal');
+const fCategory = document.getElementById('fCategory');
+const form = document.getElementById('formReservation');
+const showAll = document.getElementById('showAll');
+const cancelBtn = document.getElementById('cancelBtn');
+
+let activeFilter = null;
+
+// calc counts per category
+function countsByCategory(){
+  const map = {};
+  for(const c of categoriesList) map[c.key]=0;
+  for(const e of exhibitors){
+    if(map[e.cat]!==undefined) map[e.cat]++; else map[e.cat]=1;
+  }
+  return map;
+}
+
+function renderCategories(){
+  const counts = countsByCategory();
+  catsEl.innerHTML = '';
+  categoriesList.forEach(c=>{
+    const card = document.createElement('div'); card.className='cat';
+    card.innerHTML = `<div class="icon">${c.icon}</div>
+      <h3>${c.key}</h3>
+      <div class="count">${String(counts[c.key] || 0).padStart(2,'0')} disponibles</div>`;
+    // clic ouvre modal pour réservation
+    card.addEventListener('click', ()=> openModalFor(c.key));
+    // clic droit filtre la galerie (utile pour test)
+    card.addEventListener('contextmenu', e=>{ e.preventDefault(); filterByCategory(c.key); });
+    catsEl.appendChild(card);
+  });
+}
+
+function renderGallery(filter=null){
+  galleryEl.innerHTML='';
+  const list = filter ? exhibitors.filter(x=>x.cat===filter) : exhibitors;
+  if(!list.length){
+    galleryEl.innerHTML = `<div style="grid-column:1/-1;color:#d6e6ef;padding:10px">Aucun exposant trouvé.</div>`;
+    statusInfo.textContent = filter ? `Filtre: ${filter} (${list.length})` : `Total exposants: ${exhibitors.length}`;
+    return;
+  }
+  list.forEach(e=>{
+    const card = document.createElement('div'); card.className='card';
+    const thumb = document.createElement('div'); thumb.className='thumb'; thumb.textContent = e.name.split(' ').map(s=>s[0]).slice(0,2).join('');
+    const meta = document.createElement('div'); meta.className='meta';
+    meta.innerHTML = `<h4>${e.name}</h4><p>${e.desc || ''}</p>
+      <div class="links"><span class="chip">${e.cat}</span><span class="chip">${e.link||''}</span></div>`;
+    card.appendChild(thumb); card.appendChild(meta);
+    galleryEl.appendChild(card);
+  });
+  statusInfo.textContent = filter ? `Filtre: ${filter} (${list.length})` : `Total exposants: ${exhibitors.length}`;
+}
+
+function openModalFor(category){
+  fCategory.value = category;
+  document.getElementById('modalTitle').textContent = `Réserver une place — ${category}`;
+  modal.style.display = 'flex';
+  document.getElementById('fName').focus();
+}
+
+function closeModal(){
+  modal.style.display = 'none';
+  form.reset();
+}
+
+// filter by category (left click on header categories opens modal; use filter controls too)
+function filterByCategory(cat){
+  activeFilter = cat;
+  renderGallery(cat);
+}
+
+// form submit: add exhibitor and update UI
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('fName').value.trim();
+  if(!name) return alert('Nom requis');
+  const newEx = {
+    id: Date.now(),
+    name,
+    cat: fCategory.value || 'Autre',
+    desc: document.getElementById('fDesc').value.trim(),
+    link: document.getElementById('fLink').value.trim()
+  };
+  exhibitors.push(newEx);
+  closeModal();
+  renderCategories();
+  renderGallery(activeFilter);
+  alert('Réservation enregistrée. Merci.');
+});
+
+cancelBtn.addEventListener('click', closeModal);
+showAll.addEventListener('click', ()=>{ activeFilter=null; renderGallery(null); });
+
+// close modal when clicking outside content
+modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+
+// init
+renderCategories();
+renderGallery();
+</script>
+</body>
+</html>

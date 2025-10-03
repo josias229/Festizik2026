@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exposants — Festizik Cotonou Barbecue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --red: #C0392B;
+            --orange: #E67E22;
+            --yellow: #F1C40F;
+            --dark: #2C3E50;
+            --muted: #ECF0F1;
+            --bg: #0f2b3a;
+            --card-bg: #ffffff;
+            --success: #27AE60;
+            --info: #3498DB;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Poppins", system-ui, Arial;
+            background: linear-gradient(180deg, #f7f5f0, #f1ede3);
+            color: #223;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(90deg, rgba(44, 62, 80, 0.95), rgba(8, 35, 44, 0.9));
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: white;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(90deg, rgba(44, 62, 80, 0.95), rgba(8, 35, 44, 0.9));
+            color: white;
+            padding: 40px 28px;
+            border-radius: 12px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(230, 126, 34, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-left {
+            flex: 1;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: "Montserrat";
+            font-size: 32px;
+            margin: 0 0 12px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            max-width: 600px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 999px;
+            border: 0;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-cta {
+            background: var(--red);
+            color: white;
+            box-shadow: 0 8px 24px rgba(192, 57, 43, 0.18);
+        }
+
+        .btn-cta:hover {
+            background: #a53125;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(192, 57, 43, 0.25);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .hero-right {
+            min-width: 240px;
+            text-align: right;
+            z-index: 1;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .stats-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+        }
+
+        .stats-value {
+            font-size: 28px;
+            color: white;
+        }
+
+        /* CATEGORIES GRID */
+        .categories-section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            margin: 0 0 20px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--orange);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        .cat-card {
+            background: linear-gradient(180deg, #ffd5b7, #f7c499);
+            border-radius: 12px;
+            padding: 24px;
+            color: #142b36;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            min-height: 180px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cat-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--orange);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(16, 24, 40, 0.15);
+        }
+
+        .cat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cat-icon {
+            font-size: 40px;
+            opacity: 0.95;
+            margin-bottom: 12px;
+        }
+
+        .cat-title {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 0.6px;
+            margin-bottom: 8px;
+        }
+
+        .cat-sub {
+            margin-top: 12px;
+            color: rgba(20, 43, 54, 0.75);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* categories color variants */
+        .cat-restaurant {
+            background: linear-gradient(180deg, #f4a08a, #e74a2f);
+            color: white
+        }
+
+        .cat-shop {
+            background: linear-gradient(180deg, #f6c59d, #f0a96d);
+            color: #112
+        }
+
+        .cat-juice {
+            background: linear-gradient(180deg, #f0a09a, #ee7f74);
+            color: white
+        }
+
+        .cat-hors {
+            background: linear-gradient(180deg, #8e2e25, #b34b3e);
+            color: white
+        }
+
+        .cat-dessert {
+            background: linear-gradient(180deg, #df878b, #c75f66);
+            color: white
+        }
+
+        /* EXHIBITORS SECTION */
+        .exhibitors-section {
+            margin-top: 40px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-select {
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #d7d7d7;
+            background: white;
+            font-family: "Poppins";
+            min-width: 180px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 14px 10px 40px;
+            border-radius: 8px;
+            border: 1px solid #d7d7d7;
+            font-family: "Poppins";
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .exhibitors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .exhibitor-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .exhibitor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(16, 24, 40, 0.12);
+        }
+
+        .exhibitor-media {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .exhibitor-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--orange);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .exhibitor-body {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .exhibitor-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--dark);
+        }
+
+        .exhibitor-cat {
+            font-size: 13px;
+            color: var(--orange);
+            font-weight: 700;
+        }
+
+        .exhibitor-desc {
+            font-size: 14px;
+            color: #586672;
+            flex: 1;
+        }
+
+        .exhibitor-products {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .chip {
+            background: var(--muted);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            color: var(--dark);
+        }
+
+        /* CTA floating */
+        .float-cta {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            z-index: 1200;
+        }
+
+        .float-cta .btn {
+            box-shadow: 0 12px 30px rgba(192, 57, 43, 0.22);
+            padding: 16px 24px;
+            font-size: 16px;
+        }
+
+        /* MODAL */
+        .modal-back {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 12, 16, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 1500;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            max-width: 920px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 92vh;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            animation: modalAppear 0.3s ease-out;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #eee;
+            background: linear-gradient(90deg, #f8f9fa, #f1f3f4);
+        }
+
+        .modal-body {
+            padding: 24px;
+            overflow: auto;
+        }
+
+        .close-btn {
+            background: none;
+            border: 0;
+            font-weight: 700;
+            font-size: 20px;
+            cursor: pointer;
+            color: #777;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background: #f0f0f0;
+        }
+
+        /* Sub-cats grid */
+        .subgrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .subcard {
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #fff, #fff);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .subcard:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+            border-color: var(--orange);
+        }
+
+        .sub-title {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 16px;
+        }
+
+        .sub-places {
+            font-size: 14px;
+            color: #586672;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* FORM */
+        .form-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .field {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .field label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e6e6e6;
+            font-size: 14px;
+            font-family: "Poppins";
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--orange);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .pay-methods {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .pay-btn {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #e5e5e5;
+            background: white;
+            cursor: pointer;
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .pay-btn.active {
+            border-color: var(--red);
+            box-shadow: 0 6px 18px rgba(192, 57, 43, 0.08);
+            background: rgba(192, 57, 43, 0.05);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+        }
+
+        /* tiny notice */
+        .note {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* Success message */
+        .success-message {
+            background: rgba(39, 174, 96, 0.1);
+            border: 1px solid rgba(39, 174, 96, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            height: 4px;
+            background: #f0f0f0;
+            border-radius: 2px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--orange);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 1100px) {
+            .categories {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .exhibitors-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .subgrid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px 20px;
+            }
+
+            .hero-right {
+                text-align: left;
+                width: 100%;
+            }
+
+            .stats-card {
+                width: 100%;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .exhibitors-grid {
+                grid-template-columns: 1fr
+            }
+
+            .subgrid {
+                grid-template-columns: 1fr
+            }
+
+            .cat-card {
+                min-height: 160px
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+
+            .field {
+                min-width: 100%;
+            }
+
+            .pay-btn {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page {
+                padding: 16px;
+            }
+
+            .categories {
+                grid-template-columns: 1fr
+            }
+
+            .hero h1 {
+                font-size: 26px
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-utensils logo-icon"></i>
+                <span>Festizik Cotonou</span>
+            </div>
+            <nav class="nav-links">
+                <a class="nav-link" data-scroll="categories-section">Catégories</a>
+                <a class="nav-link" data-scroll="exhibitors-section">Exposants</a>
+                <a class="nav-link" id="header-expose">Devenir Exposant</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="page">
+        <!-- HERO -->
+        <div class="hero" role="banner" aria-labelledby="hero-title">
+            <div class="hero-left">
+                <h1 id="hero-title">Devenez exposant au Festizik Cotonou Barbecue</h1>
+                <p>Choisissez une catégorie, vérifiez les emplacements disponibles et inscrivez-vous en quelques
+                    minutes. Paiement sécurisé possible.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-cta" id="jump-categories">
+                        <i class="fas fa-tags"></i> Voir les catégories
+                    </button>
+                    <button class="btn btn-secondary" id="jump-list">
+                        <i class="fas fa-store"></i> Voir les exposants
+                    </button>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="stats-card">
+                    <div class="stats-label">Places totales</div>
+                    <div class="stats-value">120</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORIES -->
+        <section class="categories-section" id="categories-section">
+            <h2 class="section-title">
+                <i class="fas fa-th-large"></i> Catégories disponibles
+            </h2>
+            <div class="categories" id="categories"></div>
+        </section>
+
+        <!-- EXHIBITORS -->
+        <section class="exhibitors-section" id="exhibitors-section">
+            <h2 class="section-title">
+                <i class="fas fa-store"></i> Exposants inscrits
+            </h2>
+            <div class="controls">
+                <select id="filter-category" class="filter-select">
+                    <option value="">Toutes catégories</option>
+                </select>
+                <select id="filter-sub" class="filter-select">
+                    <option value="">Toutes sous-catégories</option>
+                </select>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input id="search" placeholder="Rechercher un exposant..." />
+                </div>
+                <div class="note">Astuce : Cliquez sur une catégorie ci-dessus pour vous inscrire.</div>
+            </div>
+
+            <div class="exhibitors-grid" id="exhibitors-grid" aria-live="polite"></div>
+        </section>
+    </div>
+
+    <!-- FLOAT CTA -->
+    <div class="float-cta">
+        <button class="btn btn-cta" id="float-expose">
+            <i class="fas fa-plus"></i> Je veux exposer
+        </button>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-back" id="modalBack" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal" role="document">
+            <div class="modal-head">
+                <div>
+                    <strong id="modalTitle">Choisissez une sous-catégorie</strong>
+                    <div id="modalSubtitle" style="font-size:14px;color:#6b7280">Places restantes : <span
+                            id="modalPlaces">0</span></div>
+                </div>
+                <div>
+                    <button class="close-btn" id="modalClose" aria-label="Fermer">✕</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent">
+                    <!-- Progress bar -->
+                    <div class="progress-bar">
+                        <div class="progress" id="progressBar"></div>
+                    </div>
+
+                    <!-- Subcategories list -->
+                    <div id="subList" class="subgrid"></div>
+
+                    <hr style="margin:20px 0">
+
+                    <!-- Form (hidden until user picks subcategory) -->
+                    <div id="formWrap" style="display:none">
+                        <h4 style="margin:0 0 12px">Formulaire d'inscription</h4>
+                        <div class="note">Remplissez les informations ci-dessous. Le paiement est simulé pour cette
+                            démo.</div>
+
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="inpName">Nom de l'exposant</label>
+                                <input type="text" id="inpName" placeholder="Ex : Le Grill Papa">
+                            </div>
+                            <div class="field">
+                                <label for="inpEmail">Email</label>
+                                <input type="email" id="inpEmail" placeholder="contact@exemple.com">
+                            </div>
+                            <div class="field">
+                                <label for="inpPhone">Téléphone</label>
+                                <input type="text" id="inpPhone" placeholder="+229 6X XX XX XX">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="field">
+                                <label for="inpDesc">Courte description</label>
+                                <textarea id="inpDesc" placeholder="2-3 lignes sur votre offre"></textarea>
+                            </div>
+                            <div class="field">
+                                <label for="inpProducts">Produit(s) phares (séparés par des virgules)</label>
+                                <input type="text" id="inpProducts" placeholder="Brochette, Attiéké, Jus de gingembre">
+                            </div>
+                        </div>
+
+                        <div style="margin-top:16px">
+                            <label>Mode de paiement</label>
+                            <div class="pay-methods">
+                                <button class="pay-btn" data-method="momo">
+                                    <i class="fas fa-mobile-alt"></i> Mobile Money
+                                </button>
+                                <button class="pay-btn" data-method="card">
+                                    <i class="fas fa-credit-card"></i> Carte bancaire
+                                </button>
+                                <button class="pay-btn" data-method="offline">
+                                    <i class="fas fa-handshake"></i> Réserver & Payer sur place
+                                </button>
+                            </div>
+                            <div id="payNotice" class="note" style="margin-top:10px">Montant : <strong id="payAmount">0
+                                    FCFA</strong></div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn btn-secondary" id="formCancel">Annuler</button>
+                            <button class="btn btn-cta" id="formSubmit">
+                                <i class="fas fa-lock"></i> Payer & S'inscrire
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Success -->
+                    <div id="successWrap" style="display:none;margin-top:12px">
+                        <div class="success-message show">
+                            <h3 style="color:var(--success);margin-bottom:8px">
+                                <i class="fas fa-check-circle"></i> Inscription réussie !
+                            </h3>
+                            <p>Votre inscription a été prise en compte. Un email de confirmation vous sera envoyé.</p>
+                            <div style="margin-top:16px;text-align:right">
+                                <button class="btn btn-secondary" id="successClose">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ====== DATA (simulated) ====== */
+        const categoriesData = [
+            {
+                id: 'shop', title: 'Boutique', icon: '🛍️', class: 'cat-shop', places: 6, subs: [
+                    { id: 'clothes', title: 'Vêtements', places: 2 },
+                    { id: 'goods', title: 'Goodies', places: 3 }
+                ]
+            },
+            {
+                id: 'restaurant', title: 'Restaurant', icon: '🍽️', class: 'cat-restaurant', places: 35, subs: [
+                    { id: 'grill', title: 'Grillades', places: 18 },
+                    { id: 'pizza', title: 'Pizza', places: 5 },
+                    { id: 'burgers', title: 'Burgers', places: 6 },
+                    { id: 'local', title: 'Cuisine locale', places: 6 }
+                ]
+            },
+            {
+                id: 'juice', title: 'Jus de fruit', icon: '🥤', class: 'cat-juice', places: 6, subs: [
+                    { id: 'fresh', title: 'Frais pressés', places: 4 },
+                    { id: 'smooth', title: 'Smoothies', places: 2 }
+                ]
+            },
+            {
+                id: 'hors', title: 'Hors-grillade', icon: '🍕', class: 'cat-hors', places: 4, subs: [
+                    { id: 'snack', title: 'Snacks', places: 2 },
+                    { id: 'dessert', title: 'Desserts & sucrés', places: 2 }
+                ]
+            },
+            {
+                id: 'dessert', title: 'Dessert', icon: '🍰', class: 'cat-dessert', places: 6, subs: [
+                    { id: 'cakes', title: 'Gâteaux', places: 3 },
+                    { id: 'ice', title: 'Glaces', places: 3 }
+                ]
+            }
+        ];
+
+        let exhibitors = [
+            { id: 1, name: 'Le Grill Papa', cat: 'restaurant', sub: 'grill', desc: 'Brochettes & marinades maison', products: ['Brochette', 'Brochette XXL'], img: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80' },
+            { id: 2, name: 'Fresh Juice Bar', cat: 'juice', sub: 'fresh', desc: 'Jus pressés à la minute', products: ['Jus mangue', 'Jus gingembre'], img: 'https://images.unsplash.com/photo-1506807803488-8eafc153c4c5?auto=format&fit=crop&w=1200&q=80' },
+            { id: 3, name: 'Tasty Sweets', cat: 'dessert', sub: 'cakes', desc: 'Pâtisseries et cakes artisanaux', products: ['Cake chocolat', 'Cupcakes'], img: 'https://images.unsplash.com/photo-1541599540903-216a46caad24?auto=format&fit=crop&w=1200&q=80' }
+        ];
+
+        let nextExhibitorId = 4;
+
+        /* ====== RENDER CATEGORIES ====== */
+        const categoriesEl = document.getElementById('categories');
+        const filterCat = document.getElementById('filter-category');
+        const filterSub = document.getElementById('filter-sub');
+        const exhibitorsGrid = document.getElementById('exhibitors-grid');
+        const searchInput = document.getElementById('search');
+        const progressBar = document.getElementById('progressBar');
+
+        function renderCategories() {
+            categoriesEl.innerHTML = '';
+            filterCat.innerHTML = '<option value="">Toutes catégories</option>';
+            categoriesData.forEach(cat => {
+                // card
+                const div = document.createElement('div');
+                div.className = `cat-card ${cat.class}`;
+                div.tabIndex = 0;
+                div.setAttribute('data-cat', cat.id);
+                div.innerHTML = `
+          <div>
+            <div class="cat-icon">${cat.icon}</div>
+            <div class="cat-title">${cat.title}</div>
+          </div>
+          <div class="cat-sub">
+            <i class="fas fa-map-marker-alt"></i> ${String(cat.places).padStart(2, '0')} disponibles
+          </div>
+        `;
+                div.addEventListener('click', () => openCategoryModal(cat.id));
+                div.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') openCategoryModal(cat.id);
+                });
+                categoriesEl.appendChild(div);
+
+                // filter option
+                const opt = document.createElement('option');
+                opt.value = cat.id;
+                opt.textContent = cat.title;
+                filterCat.appendChild(opt);
+            });
+        }
+        renderCategories();
+
+        /* ====== RENDER EXHIBITORS ====== */
+        function renderExhibitors() {
+            const activeCat = filterCat.value;
+            const activeSub = filterSub.value;
+            const q = searchInput.value.trim().toLowerCase();
+
+            exhibitorsGrid.innerHTML = '';
+            const list = exhibitors.filter(e => {
+                if (activeCat && e.cat !== activeCat) return false;
+                if (activeSub && e.sub !== activeSub) return false;
+                if (q && !(e.name.toLowerCase().includes(q) || (e.desc && e.desc.toLowerCase().includes(q)) || (e.products && e.products.join(' ').toLowerCase().includes(q)))) return false;
+                return true;
+            });
+
+            if (list.length === 0) {
+                exhibitorsGrid.innerHTML = `
+          <div style="grid-column:1/-1;padding:40px;border-radius:10px;background:rgba(255,255,255,0.7);text-align:center">
+            <i class="fas fa-search" style="font-size:48px;color:#ccc;margin-bottom:16px"></i>
+            <div style="font-size:18px;color:#777;margin-bottom:8px">Aucun exposant trouvé</div>
+            <div style="color:#999">Essayez de modifier vos critères de recherche</div>
+          </div>`;
+                return;
+            }
+
+            list.forEach(e => {
+                const card = document.createElement('article');
+                card.className = 'exhibitor-card';
+                card.innerHTML = `
+          <div class="exhibitor-media" style="background-image:url('${e.img}')">
+            <div class="exhibitor-badge">${getCategoryTitle(e.cat)}</div>
+          </div>
+          <div class="exhibitor-body">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="exhibitor-title">${e.name}</div>
+                <div class="exhibitor-cat">${getCategoryTitle(e.cat)} • ${getSubTitle(e.cat, e.sub)}</div>
+              </div>
+            </div>
+            <div class="exhibitor-desc">${e.desc}</div>
+            <div class="exhibitor-products">
+              ${(e.products || []).slice(0, 4).map(p => `<span class="chip">${escapeHtml(p)}</span>`).join('')}
+            </div>
+          </div>
+        `;
+                exhibitorsGrid.appendChild(card);
+            });
+        }
+        renderExhibitors();
+
+        /* ====== HELPERS ====== */
+        function getCategoryTitle(id) { const c = categoriesData.find(x => x.id === id); return c ? c.title : id; }
+        function getSubTitle(catId, subId) {
+            const cat = categoriesData.find(x => x.id === catId);
+            if (!cat) return subId || '';
+            const s = (cat.subs || []).find(x => x.id === subId);
+            return s ? s.title : subId;
+        }
+        function escapeHtml(s) { return (s || '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;'); }
+
+        /* ====== MODAL LOGIC ====== */
+        const modalBack = document.getElementById('modalBack');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSubtitle = document.getElementById('modalSubtitle');
+        const modalPlaces = document.getElementById('modalPlaces');
+        const subList = document.getElementById('subList');
+        const formWrap = document.getElementById('formWrap');
+        const formCancel = document.getElementById('formCancel');
+        const formSubmit = document.getElementById('formSubmit');
+        const successWrap = document.getElementById('successWrap');
+        const successClose = document.getElementById('successClose');
+        const modalClose = document.getElementById('modalClose');
+        const payAmount = document.getElementById('payAmount');
+        const payButtons = document.querySelectorAll('.pay-btn');
+
+        let selectedCategory = null;
+        let selectedSub = null;
+
+        function openCategoryModal(catId) {
+            selectedCategory = categoriesData.find(c => c.id === catId);
+            if (!selectedCategory) return;
+            modalTitle.textContent = `Catégorie : ${selectedCategory.title}`;
+            modalPlaces.textContent = selectedCategory.places;
+            // update progress bar
+            progressBar.style.width = '33%';
+            // render subs
+            subList.innerHTML = '';
+            selectedCategory.subs.forEach(s => {
+                const sc = document.createElement('div');
+                sc.className = 'subcard';
+                sc.tabIndex = 0;
+                sc.dataset.sub = s.id;
+                sc.innerHTML = `
+          <div class="sub-title">${s.title}</div>
+          <div class="sub-places">
+            <i class="fas fa-map-marker-alt"></i> ${String(s.places).padStart(2, '0')} disponibles
+          </div>
+        `;
+                sc.addEventListener('click', () => chooseSubcategory(s.id));
+                sc.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') chooseSubcategory(s.id);
+                });
+                subList.appendChild(sc);
+            });
+            // reset form area
+            formWrap.style.display = 'none';
+            successWrap.style.display = 'none';
+            // preselect default payment
+            document.querySelectorAll('.pay-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector('.pay-btn[data-method="momo"]').classList.add('active');
+            updatePayAmount(null);
+            // show modal
+            modalBack.style.display = 'flex';
+            modalBack.setAttribute('aria-hidden', 'false');
+        }
+
+        // choose sub-cat
+        function chooseSubcategory(subId) {
+            selectedSub = (selectedCategory.subs || []).find(x => x.id === subId);
+            if (!selectedSub) return;
+            modalPlaces.textContent = selectedSub.places;
+            // update progress bar
+            progressBar.style.width = '66%';
+            // show form
+            formWrap.style.display = 'block';
+            successWrap.style.display = 'none';
+            // set amount (example: price varies by category)
+            const base = priceForCategory(selectedCategory.id, selectedSub.id);
+            updatePayAmount(base);
+            // scroll to form
+            setTimeout(() => document.getElementById('inpName').focus(), 120);
+        }
+
+        /* ===== PAYMENT SIMULATION & FORM ===== */
+        function priceForCategory(cat, sub) {
+            // simple pricing rules for demo
+            if (cat === 'restaurant') return 15000;
+            if (cat === 'shop') return 8000;
+            if (cat === 'juice') return 5000;
+            if (cat === 'dessert') return 4000;
+            if (cat === 'hors') return 7000;
+            return 5000;
+        }
+
+        function updatePayAmount(val) {
+            const amount = val !== null ? val : priceForCategory(selectedCategory?.id, selectedSub?.id);
+            payAmount.textContent = `${amount.toLocaleString('fr-FR')} FCFA`;
+        }
+
+        /* pay method toggles */
+        payButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                payButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        /* modal close handlers */
+        function closeModal() {
+            modalBack.style.display = 'none';
+            modalBack.setAttribute('aria-hidden', 'true');
+            formWrap.style.display = 'none';
+            successWrap.style.display = 'none';
+            selectedCategory = null;
+            selectedSub = null;
+            progressBar.style.width = '0%';
+            // clear form
+            document.getElementById('inpName').value = '';
+            document.getElementById('inpEmail').value = '';
+            document.getElementById('inpPhone').value = '';
+            document.getElementById('inpDesc').value = '';
+            document.getElementById('inpProducts').value = '';
+        }
+        modalClose.addEventListener('click', closeModal);
+        formCancel.addEventListener('click', closeModal);
+        successClose.addEventListener('click', closeModal);
+        modalBack.addEventListener('click', (e) => { if (e.target === modalBack) closeModal(); });
+
+        /* ===== FORM SUBMIT (simulate payment + add exhibitor) ===== */
+        formSubmit.addEventListener('click', () => {
+            const name = document.getElementById('inpName').value.trim();
+            const email = document.getElementById('inpEmail').value.trim();
+            const phone = document.getElementById('inpPhone').value.trim();
+            const desc = document.getElementById('inpDesc').value.trim();
+            const products = document.getElementById('inpProducts').value.trim();
+
+            if (!name || !phone) {
+                alert('Veuillez renseigner au minimum le nom et le téléphone.');
+                return;
+            }
+            // simulate a payment flow
+            const method = document.querySelector('.pay-btn.active').dataset.method;
+            // show processing (simple)
+            formSubmit.disabled = true;
+            formSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
+            setTimeout(() => {
+                // assume success
+                formSubmit.disabled = false;
+                formSubmit.innerHTML = '<i class="fas fa-lock"></i> Payer & S\'inscrire';
+                // update progress bar
+                progressBar.style.width = '100%';
+                // decrease place count
+                if (selectedSub && selectedSub.places > 0) selectedSub.places--;
+                if (selectedCategory && selectedCategory.places > 0) selectedCategory.places--;
+                renderCategories(); // update top cards
+
+                // add exhibitor
+                const newEx = {
+                    id: nextExhibitorId++,
+                    name: name,
+                    cat: selectedCategory.id,
+                    sub: selectedSub.id,
+                    desc: desc || 'Exposant au festival',
+                    products: products ? products.split(',').map(s => s.trim()) : [],
+                    img: 'https://images.unsplash.com/photo-1514512364185-1b7f3a6d5f0b?auto=format&fit=crop&w=1200&q=80'
+                };
+                exhibitors.unshift(newEx);
+                renderExhibitors();
+
+                // show success block
+                formWrap.style.display = 'none';
+                successWrap.style.display = 'block';
+                // also update the filter sub dropdown if needed
+                populateSubFilterOptions(filterCat.value || '');
+            }, 1500);
+        });
+
+        /* ===== FILTERS population and behavior ===== */
+        function populateSubFilterOptions(catId) {
+            filterSub.innerHTML = '<option value="">Toutes sous-catégories</option>';
+            const cat = categoriesData.find(c => c.id === catId);
+            if (!cat) return;
+            cat.subs.forEach(s => {
+                const o = document.createElement('option');
+                o.value = s.id; o.textContent = s.title;
+                filterSub.appendChild(o);
+            });
+        }
+
+        /* when category filter changes */
+        filterCat.addEventListener('change', () => {
+            populateSubFilterOptions(filterCat.value);
+            renderExhibitors();
+        });
+        filterSub.addEventListener('change', renderExhibitors);
+        searchInput.addEventListener('input', () => setTimeout(renderExhibitors, 150));
+
+        /* initial populate sub filter choices = all */
+        (function initFilters() {
+            populateSubFilterOptions('');
+        })();
+
+        /* quick jump buttons */
+        document.getElementById('jump-categories').addEventListener('click', () => {
+            document.getElementById('categories-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        document.getElementById('jump-list').addEventListener('click', () => {
+            document.getElementById('exhibitors-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        document.getElementById('float-expose').addEventListener('click', () => {
+            // open first category modal as entry point
+            openCategoryModal(categoriesData[0].id);
+        });
+        document.getElementById('header-expose').addEventListener('click', () => {
+            openCategoryModal(categoriesData[0].id);
+        });
+
+        /* smooth scrolling for nav links */
+        document.querySelectorAll('[data-scroll]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('data-scroll');
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        /* render once more to ensure state */
+        renderCategories();
+        renderExhibitors();
+    </script>
+</body>
+
+</html>

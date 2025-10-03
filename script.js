@@ -46,6 +46,16 @@ hamburger.addEventListener('click', function () {
     }
 });
 
+// Fermer le menu hamburger quand on clique sur un lien
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = hamburger.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    });
+});
+
 // ===== CARROUSEL DE TEXTE =====
 document.addEventListener('DOMContentLoaded', function () {
     const textItems = document.querySelectorAll('.text-item');
@@ -452,8 +462,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Décompte jusqu'au festival
 document.addEventListener('DOMContentLoaded', function () {
-    // Date cible du festival (15 Décembre 2025)
-    const festivalDate = new Date('December 15, 2025 18:00:00').getTime();
+    // Date cible du festival (23 Juillet 2026 - premier jour du festival)
+    const festivalDate = new Date('July 23, 2026 00:00:00').getTime();
 
     // Éléments du timer
     const daysElement = document.getElementById('days');
@@ -511,6 +521,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 celebrationMsg.innerHTML = `
                     <h3 style="color: #FF7B00; margin-bottom: 10px;">Le Festival a Commencé !</h3>
                     <p style="margin: 0;">Rendez-vous à la Plage de Fidjrossè pour vivre l'expérience Festizik !</p>
+                    <p style="margin: 10px 0 0 0; font-size: 14px; opacity: 0.8;">Du 23 Juillet au 02 Août 2026</p>
                 `;
                 countdownContent.appendChild(celebrationMsg);
             }
@@ -577,8 +588,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Vérifier si l'API Web Share est supportée
             if (navigator.share) {
                 navigator.share({
-                    title: 'Festizik Cotonou BBQ 2025',
-                    text: 'Ne manquez pas le Festizik Cotonou BBQ 2025! Découvrez le festival de grillades et de musique le plus attendu du Bénin.',
+                    title: 'Festizik Cotonou BBQ 2026',
+                    text: 'Ne manquez pas le Festizik Cotonou BBQ 2026! Du 23 Juillet au 02 Août - Découvrez le festival de grillades et de musique le plus attendu du Bénin.',
                     url: window.location.href
                 })
                     .catch(error => {
@@ -593,238 +604,76 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Filtrage des exposants par catégorie
-document.addEventListener('DOMContentLoaded', function () {
-    // Filtrage des exposants
+document.addEventListener('DOMContentLoaded', function() {
     const categoryButtons = document.querySelectorAll('.category-btn');
-    const exhibitorCards = document.querySelectorAll('.exhibitor-card');
+    const mainCards = document.querySelectorAll('.category-main-card');
+    const subcategoryCards = document.querySelectorAll('.subcategory-card');
+    const reserveButtons = document.querySelectorAll('.btn-reserve-square');
 
+    // Fonction pour afficher la vue "Tous" (EXACTEMENT 5 catégories principales)
+function showMainView() {
+    mainCards.forEach((card, index) => {
+        if (index < 5) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    subcategoryCards.forEach(card => {
+        card.style.display = 'none';
+    });
+}
+
+    // Fonction pour afficher les sous-catégories d'une catégorie spécifique
+    function showSubcategories(category) {
+        mainCards.forEach(card => {
+            card.style.display = 'none';
+        });
+        subcategoryCards.forEach(card => {
+            if (card.getAttribute('data-category') === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Gestion des clics sur les boutons de filtre
     categoryButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const category = button.getAttribute('data-category');
-
-            // Mettre à jour le bouton actif
+        button.addEventListener('click', function() {
+            // Retirer la classe active de tous les boutons
             categoryButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+            // Ajouter la classe active au bouton cliqué
+            this.classList.add('active');
 
-            // Filtrer les cartes
-            exhibitorCards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 10);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
+            const category = this.getAttribute('data-category');
+
+            if (category === 'all') {
+                showMainView();
+            } else {
+                showSubcategories(category);
+            }
         });
     });
 
-    // Animation des cartes
-    exhibitorCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    });
-
-    setTimeout(() => {
-        exhibitorCards.forEach((card, index) => {
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
-    }, 500);
-
-    // Tabs de recrutement
-    const recruitmentTabs = document.querySelectorAll('.recruitment-tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    recruitmentTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const tabId = tab.getAttribute('data-tab');
-
-            // Mettre à jour l'onglet actif
-            recruitmentTabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-
-            // Afficher le contenu correspondant
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-                if (content.id === `tab-${tabId}`) {
-                    content.classList.add('active');
-                }
-            });
-        });
-    });
-
-    // Formulaire de bénévole
-    const volunteerForm = document.getElementById('volunteer-form');
-    if (volunteerForm) {
-        volunteerForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Simulation d'envoi
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
-            submitBtn.disabled = true;
-
-            setTimeout(() => {
-                submitBtn.innerHTML = '<i class="fas fa-check"></i> Envoyé !';
-                submitBtn.style.background = '#4CAF50';
-
-                // Réinitialiser le formulaire
-                this.reset();
-
-                // Retour à l'état initial après 3 secondes
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                    submitBtn.style.background = '';
-                }, 3000);
-            }, 2000);
-        });
-    }
-
-    // Interaction avec la carte 3D
-    const exploreBtn = document.querySelector('.btn-explore');
-    if (exploreBtn) {
-        exploreBtn.addEventListener('click', function () {
-            // Simulation d'ouverture de la carte 3D
-            const modal = document.createElement('div');
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.background = 'rgba(0,0,0,0.9)';
-            modal.style.display = 'flex';
-            modal.style.justifyContent = 'center';
-            modal.style.alignItems = 'center';
-            modal.style.zIndex = '10000';
-
-            modal.innerHTML = `
-                <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 500px; width: 90%;">
-                    <h3 style="color: #FF7B00; margin-bottom: 15px;">Carte Interactive 3D</h3>
-                    <p style="color: #666; margin-bottom: 20px;">La carte interactive 3D sera disponible prochainement. Vous pourrez explorer le site du festival, localiser les stands et planifier votre visite.</p>
-                    <div style="height: 200px; background: #f5f5f5; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; border-radius: 10px;">
-                        <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: #FF7B00;"></i>
-                    </div>
-                    <button style="padding: 10px 20px; background: #FF7B00; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                        Fermer
-                    </button>
-                </div>
-            `;
-
-            document.body.appendChild(modal);
-
-            // Fermer la modal
-            modal.querySelector('button').addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
-        });
-    }
-
-    // Réservation de stand
-    const reserveButtons = document.querySelectorAll('.btn-reserve');
+    // Gestion des clics sur les boutons "Voir les options" / "Réserver"
     reserveButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const card = this.closest('.exhibitor-card');
-            const exhibitorName = card.querySelector('h3').textContent;
-            const standNumber = card.querySelector('.stand-number').textContent;
-
-            // Simulation de réservation
-            const modal = document.createElement('div');
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100%';
-            modal.style.height = '100%';
-            modal.style.background = 'rgba(0,0,0,0.8)';
-            modal.style.display = 'flex';
-            modal.style.justifyContent = 'center';
-            modal.style.alignItems = 'center';
-            modal.style.zIndex = '10000';
-
-            modal.innerHTML = `
-                <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 500px; width: 90%;">
-                    <h3 style="color: #FF7B00; margin-bottom: 15px;">Réserver un Stand</h3>
-                    <p style="color: #666; margin-bottom: 20px;">Intéressé par le ${standNumber} pour ${exhibitorName} ? Remplissez le formulaire ci-dessous et notre équipe vous recontactera.</p>
-                    
-                    <div style="text-align: left; margin-bottom: 20px;">
-                        <div style="margin-bottom: 15px;">
-                            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Votre nom</label>
-                            <input type="text" style="width: 100%; padding: 10px; border: 2px solid #eee; border-radius: 5px;">
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Votre email</label>
-                            <input type="email" style="width: 100%; padding: 10px; border: 2px solid #eee; border-radius: 5px;">
-                        </div>
-                        <div style="margin-bottom: 15px;">
-                            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Votre téléphone</label>
-                            <input type="tel" style="width: 100%; padding: 10px; border: 2px solid #eee; border-radius: 5px;">
-                        </div>
-                    </div>
-                    
-                    <div style="display: flex; gap: 10px; justify-content: center;">
-                        <button style="padding: 10px 20px; background: #ccc; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                            Annuler
-                        </button>
-                        <button style="padding: 10px 20px; background: #FF7B00; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                            Envoyer la demande
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            document.body.appendChild(modal);
-
-            // Fermer la modal
-            const buttons = modal.querySelectorAll('button');
-            buttons[0].addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
-
-            buttons[1].addEventListener('click', () => {
-                modal.querySelector('p').textContent = 'Demande envoyée ! Notre équipe vous contactera sous 48h.';
-                modal.querySelector('div[style*="text-align: left"]').style.display = 'none';
-                buttons[0].textContent = 'Fermer';
-                buttons[1].style.display = 'none';
-            });
-        });
-    });
-});
-
-// Script pour le filtrage des catégories
-document.addEventListener('DOMContentLoaded', function () {
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    const exhibitorCards = document.querySelectorAll('.exhibitor-card-square');
-
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const category = button.getAttribute('data-category');
-
-            // Mettre à jour le bouton actif
+        button.addEventListener('click', function(e) {
+            e.stopPropagation(); // Empêcher la propagation du clic
+            
+            const category = this.getAttribute('data-category');
+            
+            // Mettre à jour le filtre actif
             categoryButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-
-            // Filtrer les cartes
-            exhibitorCards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            document.querySelector(`.category-btn[data-category="${category}"]`).classList.add('active');
+            
+            // Afficher les sous-catégories
+            showSubcategories(category);
         });
     });
+
+    // Afficher la vue principale au chargement
+    showMainView();
 });
 
 // Animation pour la section USP
@@ -854,63 +703,78 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// Gestion du modal partenariat
+document.addEventListener('DOMContentLoaded', function() {
+    const openModalBtn = document.getElementById('openPartnershipModal');
+    const closeModalBtn = document.getElementById('closePartnershipModal');
+    const modal = document.getElementById('partnershipModal');
 
+    // Ouvrir le modal
+    openModalBtn.addEventListener('click', function() {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Fermer le modal
+    closeModalBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+
+    // Fermer en cliquant en dehors
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Gestion du formulaire
+    const partnerForm = document.getElementById('partner-form');
+    partnerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Ici vous ajouterez la logique d'envoi du formulaire
+        alert('Demande de partenariat envoyée ! Nous vous contacterons rapidement.');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+});
 // ===== FONCTIONNALITÉS SPÉCIFIQUES À LA PAGE PROGRAMME =====
 
-// Filtrage des artistes par jour
-function initProgrammeFilters() {
+// Filtrage du programme
+document.addEventListener('DOMContentLoaded', function() {
     const filterTabs = document.querySelectorAll('.filter-tab');
-    const artistCards = document.querySelectorAll('.artist-card');
-    
-    // Vérifier si on est sur la page programme
-    if (filterTabs.length > 0 && artistCards.length > 0) {
-        filterTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const category = tab.getAttribute('data-category');
+    const programmeCards = document.querySelectorAll('.programme-card');
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // Mettre à jour le bouton actif
+            filterTabs.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filtrer les cartes
+            programmeCards.forEach(card => {
+                const cardCategories = card.getAttribute('data-category').split(' ');
                 
-                // Mettre à jour le bouton actif
-                filterTabs.forEach(btn => btn.classList.remove('active'));
-                tab.classList.add('active');
-                
-                // Filtrer les cartes
-                artistCards.forEach(card => {
-                    if (category === 'all') {
-                        card.style.display = 'flex';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 10);
-                    } else {
-                        const cardDate = card.querySelector('.artist-meta-line').textContent.toLowerCase();
-                        if (cardDate.includes(category)) {
-                            card.style.display = 'flex';
-                            setTimeout(() => {
-                                card.style.opacity = '1';
-                                card.style.transform = 'translateY(0)';
-                            }, 10);
-                        } else {
-                            card.style.opacity = '0';
-                            card.style.transform = 'translateY(20px)';
-                            setTimeout(() => {
-                                card.style.display = 'none';
-                            }, 300);
-                        }
-                    }
-                });
+                if (category === 'all' || cardCategories.includes(category)) {
+                    card.style.display = 'flex';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
             });
         });
-        
-        // Animation des cartes au chargement
-        setTimeout(() => {
-            artistCards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        }, 500);
-    }
-}
+    });
+});
 
 // Animation spécifique à la page programme
 function animateProgrammePage() {
@@ -1164,3 +1028,4 @@ document.addEventListener('DOMContentLoaded', function() {
         initArtisteDetail();
     }
 });
+

@@ -3,304 +3,1669 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page en cours d'édition - Festizik</title>
+    <title>Exposants - Festizik Cotonou BBQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* ===== STYLES GÉNÉRAUX ===== */
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+   <link rel="stylesheet" href="style.css">
+   <style>
+        /* ===== VARIABLES ET STYLES GÉNÉRAUX ===== */
+        :root {
+            --primary: #FF7B00;
+            --primary-dark: #e06e00;
+            --primary-light: #FFE5CC;
+            --secondary: #222;
+            --light-bg: #f5eddc;
+            --white: #ffffff;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
         }
 
-        body {
+        body.exposants-page {
+            background: var(--light-bg);
+            padding-top: 80px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
-            color: #333;
-            background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-            min-height: 100vh;
+        }
+
+        .exposants-page nav {
+            background-color: #000;
+            padding: 15px 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .exposants-page nav.scrolled {
+            padding: 12px 40px;
+        }
+
+        .exposants-page .nav-links {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
         }
 
-        /* ===== CONTAINER PRINCIPAL ===== */
-        .container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            padding: 50px 40px;
-            text-align: center;
-            max-width: 800px;
-            width: 100%;
+        .exposants-page .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
             position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
         }
 
-        .container::before {
+        .exposants-page .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .exposants-page .nav-links a.active:after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                to bottom right,
-                rgba(255, 123, 0, 0.1),
-                rgba(255, 123, 0, 0)
-            );
-            transform: rotate(30deg);
-            z-index: 0;
+            bottom: -5px;
+            left: 0;
+            width: 70%;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
         }
 
-        /* ===== CONTENU ===== */
-        .content {
-            position: relative;
-            z-index: 2;
+        .exposants-page .nav-links a:hover {
+            color: var(--primary);
         }
 
-        .icon-container {
-            margin-bottom: 30px;
-        }
-
-        .icon {
-            font-size: 80px;
-            color: #FF7B00;
-            animation: pulse 2s infinite;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+        .exposants-page .hamburger {
             color: white;
-            font-weight: 800;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-
-        /* ===== CARROUSEL DE CITATIONS ===== */
-        .quote-carousel {
-            background: rgba(255, 123, 0, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
-            position: relative;
-            border: 1px solid rgba(255, 123, 0, 0.2);
-        }
-
-        .quote {
-            font-size: 1.4rem;
-            font-style: italic;
-            line-height: 1.6;
-            color: #f3e7d1;
-            display: none;
-            animation: fadeIn 1.5s;
-        }
-
-        .quote.active {
-            display: block;
-        }
-
-        .author {
-            display: block;
-            margin-top: 15px;
-            font-weight: 600;
-            color: #FF7B00;
-            font-style: normal;
-        }
-
-        /* ===== BARRE DE PROGRESSION ===== */
-        .progress-container {
-            height: 8px;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            margin: 40px 0 30px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(to right, #FF7B00, #FF5500);
-            border-radius: 4px;
-            animation: progress 3s infinite;
-        }
-
-        .status {
-            font-size: 1.1rem;
-            color: #aaa;
-            margin-bottom: 30px;
-        }
-
-        /* ===== BOUTON ACCUEIL ===== */
-        .home-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #FF7B00 0%, #FF5500 100%);
-            color: white;
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 123, 0, 0.4);
+            background: none;
             border: none;
+            font-size: 1.5rem;
+            display: none;
             cursor: pointer;
+        }
+
+        .ticket-btn {
+            background: var(--primary);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .ticket-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .ticket-icon {
+            margin-right: 5px;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .exposants-hero {
+            background: linear-gradient(135deg, rgba(255,123,0,0.9) 0%, rgba(34,34,34,0.9) 100%), url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exposants-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ===== FILTRES INTERACTIFS ===== */
+        .filters-section {
+            padding: 40px 0;
+            background: var(--white);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .filters-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 30px;
+            border: 2px solid #eee;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,123,0,0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .filter-tabs {
+            display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .home-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 123, 0, 0.6);
+        .filter-tab {
+            background: var(--white);
+            border: 2px solid #eee;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .home-button:active {
+        .filter-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .filter-tab:hover:not(.active) {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-count {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .view-toggle {
+            display: flex;
+            border: 2px solid #eee;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .view-btn {
+            background: var(--white);
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .view-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .view-btn:first-child {
+            border-right: 1px solid #eee;
+        }
+
+        /* ===== GRID DES EXPOSANTS ===== */
+        .exposants-grid-section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 0;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .results-count {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .exposants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .exposant-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .exposant-card.visible {
+            opacity: 1;
             transform: translateY(0);
         }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.8;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
+        .exposant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
         }
 
-        @keyframes progress {
-            0% {
-                width: 0%;
-            }
-            50% {
-                width: 60%;
-            }
-            100% {
-                width: 100%;
-            }
+        .exposant-media {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .exposant-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .exposant-card:hover .exposant-media img {
+            transform: scale(1.08);
+        }
+
+        .exposant-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .exposant-favorite {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .exposant-favorite:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .exposant-favorite.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .exposant-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exposant-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .exposant-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .exposant-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .specialty-badge {
+            background: rgba(255, 123, 0, 0.1);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .exposant-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .exposant-social {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            color: #555;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .exposant-action {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .exposant-action:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ===== LIST VIEW ===== */
+        .exposants-list {
+            display: none;
+        }
+
+        .exposant-list-item {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            display: flex;
+            gap: 25px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .exposant-list-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .exposant-list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .list-media {
+            width: 200px;
+            height: 150px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .list-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .exposant-list-item:hover .list-media img {
+            transform: scale(1.08);
+        }
+
+        .list-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .list-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 0;
+        }
+
+        .list-badge {
+            background: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .list-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .list-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination-section {
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination {
+            display: flex;
+            gap: 10px;
+        }
+
+        .page-item {
+            list-style: none;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--white);
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+        }
+
+        .page-link:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .page-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .page-link.prev, .page-link.next {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .page-link.prev:hover, .page-link.next:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn.secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* ===== FOOTER ===== */
+        .festizik-footer {
+            background: #1a1a1a;
+            color: #f1f1f1;
+            padding: 60px 0 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-logo img {
+            margin-bottom: 15px;
+        }
+
+        .footer-description {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            color: #ccc;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #aaa;
+        }
+
+        .contact-info i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .newsletter h4 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .newsletter p {
+            color: #aaa;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            background: #333;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .newsletter-form input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+        }
+
+        .newsletter-form input::placeholder {
+            color: #888;
+        }
+
+        .newsletter-form button {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--primary-dark);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding: 25px 0;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            margin: 0;
+        }
+
+        .legal-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .legal-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .legal-links a:hover {
+            color: var(--primary);
         }
 
         /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .footer-main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .exposants-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
-            h1 {
+            .exposants-page .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #000;
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+            }
+            
+            .exposants-page .nav-links.active {
+                display: flex;
+            }
+            
+            .exposants-page .hamburger {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .filters-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .filter-tabs {
+                justify-content: center;
+            }
+            
+            .view-toggle {
+                align-self: center;
+            }
+            
+            .exposant-list-item {
+                flex-direction: column;
+            }
+            
+            .list-media {
+                width: 100%;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .footer-main {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .legal-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .exposants-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-stats {
+                gap: 20px;
+            }
+            
+            .stat-number {
                 font-size: 2rem;
-            }
-            
-            .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .quote {
-                font-size: 1.2rem;
-            }
-            
-            .container {
-                padding: 30px 20px;
-            }
-            
-            .home-button {
-                padding: 12px 25px;
-                font-size: 1rem;
-            }
-            
-            .icon {
-                font-size: 60px;
             }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="content">
-            <div class="icon-container">
-                <i class="fas fa-tools icon"></i>
-            </div>
-            
-            <h1>Page en cours d'édition</h1>
-            
-            <p class="subtitle">Notre équipe travaille dur pour vous préparer une expérience exceptionnelle. Revenez bientôt pour découvrir du contenu exclusif!</p>
-            
-            <div class="quote-carousel">
-                <div class="quote active">
-                    "La perfection est atteinte, non pas lorsqu'il n'y a plus rien à ajouter, mais lorsqu'il n'y a plus rien à retirer."
-                    <span class="author">- Antoine de Saint-Exupéry</span>
-                </div>
-                <div class="quote">
-                    "Le travail accompli avec passion mène toujours à de meilleurs résultats."
-                    <span class="author">- Anonyme</span>
-                </div>
-                <div class="quote">
-                    "Patience et persévérance sont les clés de toute réalisation valable."
-                    <span class="author">- Proverbe français</span>
-                </div>
-                <div class="quote">
-                    "La simplicité est la sophistication suprême."
-                    <span class="author">- Léonard de Vinci</span>
-                </div>
-            </div>
-            
-            <!-- <div class="progress-container">
-                <div class="progress-bar"></div>
-            </div> -->
-            
-            <p class="status">Nous travaillons dur pour vous offrir la meilleure expérience possible. Merci de votre patience!</p>
-            
-            <button class="home-button" onclick="window.location.href='index.html'">
-                <i class="fas fa-home"></i> Revenir à l'accueil
-            </button>
+<body class="exposants-page">
+    <!-- Barre de navigation -->
+    <nav>
+        <div class="logo">
+            <img src="/images/CTN_BBQ_H2.png" alt="Festizik Logo" width="150">
         </div>
-    </div>
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Le Festival</a></li>
+            <li><a href="programme.html">Programme</a></li>
+            <li><a href="Exposants.html" class="active">Exposants</a></li>
+            <li><a href="Instants+.html">Instants+</a></li>
+            <li><a href="Festishop.html">Festishop</a></li>
+            <li><a href="Billeterie.html" class="ticket-btn"><i class="fas fa-ticket-alt ticket-icon"></i> Billetterie</a></li>
+        </ul>
+    </nav>
+
+    <!-- Section Hero -->
+    <section class="exposants-hero">
+        <div class="hero-content">
+            <h1 class="hero-title animate__animated animate__fadeInDown">Découvrez nos <span style="color: #FFE5CC;">Exposants</span></h1>
+            <p class="hero-subtitle animate__animated animate__fadeInUp">Des saveurs authentiques, des créations uniques et des expériences culinaires inoubliables vous attendent à Festizik 2025</p>
+            
+            <div class="hero-stats animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Exposants</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">Catégories</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Jours de festivités</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Filtres -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Rechercher un exposant...">
+                </div>
+                
+                <div class="filter-tabs">
+                    <div class="filter-tab active" data-filter="all">
+                        <span>Tous</span>
+                        <span class="filter-count">50</span>
+                    </div>
+                    <div class="filter-tab" data-filter="poulets">
+                        <i class="fas fa-drumstick-bite"></i>
+                        <span>Poulets</span>
+                        <span class="filter-count">8</span>
+                    </div>
+                    <div class="filter-tab" data-filter="boutiques">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Boutiques</span>
+                        <span class="filter-count">12</span>
+                    </div>
+                    <div class="filter-tab" data-filter="bars">
+                        <i class="fas fa-cocktail"></i>
+                        <span>Bars</span>
+                        <span class="filter-count">8</span>
+                    </div>
+                </div>
+                
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" data-view="list">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Grille des Exposants -->
+    <section class="exposants-grid-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nos <span>Exposants</span></h2>
+                <div class="results-count" id="results-count">50 exposants</div>
+            </div>
+            
+            <!-- Vue Grille -->
+            <div class="exposants-grid" id="exposants-grid">
+                <!-- Les cartes d'exposants seront générées dynamiquement -->
+            </div>
+            
+            <!-- Vue Liste -->
+            <div class="exposants-list" id="exposants-list">
+                <!-- Les éléments de liste seront générés dynamiquement -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination-section">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a href="#" class="page-link prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a href="#" class="page-link active">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="#" class="page-link">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="#" class="page-link">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a href="#" class="page-link next">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Devenez Exposant à Festizik 2025</h2>
+                <p class="cta-text">Rejoignez la plus grande célébration culinaire de Cotonou et faites découvrir vos créations à des milliers de visiteurs passionnés.</p>
+                <div class="cta-buttons">
+                    <button class="cta-btn">
+                        <i class="fas fa-store"></i>
+                        Devenir Exposant
+                    </button>
+                    <button class="cta-btn secondary">
+                        <i class="fas fa-info-circle"></i>
+                        Plus d'informations
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="festizik-footer">
+        <div class="footer-content">
+            <!-- Section principale du footer -->
+            <div class="footer-main">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/images/CTN_BBQ_P1.png" alt="Festizik Logo" width="150">
+                    </div>
+                    <p class="footer-description">
+                        Festizik - 10 ans de passion, de saveurs et de vibrations à Cotonou. Rejoignez-nous pour une
+                        expérience culinaire et musicale inoubliable.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="#">Le Festival</a></li>
+                        <li><a href="programme.html">Programme</a></li>
+                        <li><a href="#">Billetterie</a></li>
+                        <li><a href="Exposants.html">Exposants</a></li>
+                        <li><a href="#">Plan du site</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Édition 2025-2026</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Artistes</a></li>
+                        <li><a href="#">Instants+</a></li>
+                        <li><a href="#">Festishop</a></li>
+                        <li><a href="#">Espace Presse</a></li>
+                        <li><a href="#">Devenir Partenaire</a></li>
+                        <li><a href="#">Devenir Bénévole</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact & Infos</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Plage de Fidjrossè, Cotonou, Bénin</p>
+                        <p><i class="fas fa-phone"></i> +229 XX XX XX XX</p>
+                        <p><i class="fas fa-envelope"></i> info@festizik.com</p>
+                    </div>
+
+                    <div class="newsletter">
+                        <h4>Newsletter</h4>
+                        <p>Restez informé des dernières actualités</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Votre email" required>
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section de bas de footer -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 Festizik Cotonou BBQ. Tous droits réservés.</p>
+                    <div class="legal-links">
+                        <a href="#">Politique de confidentialité</a>
+                        <a href="#">Conditions d'utilisation</a>
+                        <a href="#">Mentions légales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Carrousel de citations
-        const quotes = document.querySelectorAll('.quote');
-        let currentQuote = 0;
-        
-        function showNextQuote() {
-            quotes[currentQuote].classList.remove('active');
+        // ===== DONNÉES DES EXPOSANTS =====
+        const exposantsData = [
+            {
+                id: 1,
+                name: "BBQ Master",
+                category: "poulets",
+                description: "Spécialiste des grillades et viandes fumées depuis 15 ans. Notre savoir-faire unique nous permet de proposer des saveurs authentiques.",
+                image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
+                specialties: ["Viandes fumées", "Sauces maison"],
+                social: {
+                    facebook: "#",
+                    instagram: "#",
+                    whatsapp: "#",
+                    website: "#"
+                }
+            },
+            {
+                id: 2,
+                name: "Artisan Créations",
+                category: "boutiques",
+                description: "Créations artisanales uniques inspirées de la culture béninoise. Bijoux, sculptures et objets décoratifs fabriqués à la main.",
+                image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?auto=format&fit=crop&w=800&q=80",
+                specialties: ["Bijoux artisanaux", "Sculptures", "Textiles"],
+                social: {
+                    facebook: "#",
+                    instagram: "#",
+                    whatsapp: "#",
+                    website: "#"
+                }
+            },
+            {
+                id: 3,
+                name: "Cocktails du Soleil",
+                category: "bars",
+                description: "Bar ambulant spécialisé dans les cocktails créatifs à base de fruits tropicaux frais. Une expérience gustative rafraîchissante.",
+                image: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=800&q=80",
+                specialties: ["Cocktails maison", "Fruits locaux"],
+                social: {
+                    facebook: "#",
+                    instagram: "#",
+                    whatsapp: "#",
+                    website: "#"
+                }
+            },
+            {
+                id: 4,
+                name: "Burger Fusion",
+                category: "fast-food",
+                description: "Burgers créatifs mélangeant saveurs locales et internationales. Des recettes uniques pour une expérience gustative inédite.",
+                image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+                specialties: ["Burgers", "Frites maison"],
+                social: {
+                    facebook: "#",
+                    instagram: "#",
+                    whatsapp: "#",
+                    website: "#"
+                }
+            },
+            {
+                id: 5,
+                name: "Pizza Nomade",
+                category: "fast-food",
+                description: "Pizzas cuites au feu de bois avec des ingrédients frais et locaux. Une expérience italienne avec une touche africaine.",
+                image: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=800&q=80",
+                specialties: ["Pizza", "Feu de bois"],
+                social: {
+                    facebook: "#",
+                    instagram: "#",
+                    whatsapp: "#",
+                    website: "#"
+                }
+            },
+            {
+                id: 6,
+                name: "Délices Végétariens",
+                category: "hors-grillades",
+                description: "Cuisine végétarienne créative et savoureuse. Des plats équilibrés qui raviront même les plus grands amateurs de viande.",
+                image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80",
+                specialties: ["Végétarien", "Produits bio"],
+                social: {
+                    facebook: "#",
+                    instagram: "#",
+                    whatsapp: "#",
+                    website: "#"
+                }
+            },
+            {
+                id: 7,
+                name: "Grillades du Bénin",
+                category: "poulets",
+                description: "Authentiques recettes de grillades béninoises transmises de génération en génération. Une expérience culinaire traditionnelle.",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+                specialties: ["Recettes traditionnelles", "Épices locales"],
+                social: {
+                    facebook: "#",
+                    instagram: "#",
+                    whatsapp: "#",
+                    website: "#"
+                }
+            },
+            {
+                id: 8,
+                name: "Saveurs Océanes",
+                category: "poisson",
+                description: "Poissons et fruits de mer frais grillés à la perfection. Des produits de la mer sélectionnés avec soin pour votre plaisir.",
+                image: "https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?auto=format&fit=crop&w=800&q=80",
+                specialties: ["Fruits de mer", "Poissons frais"],
+                social: {
+                    facebook: "#",
+                    instagram: "#",
+                    whatsapp: "#",
+                    website: "#"
+                }
+            }
+        ];
+
+        // ===== FONCTIONNALITÉS DE LA PAGE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialisation
+            initExposantsPage();
+            initNavigation();
+            initFilters();
+            initViewToggle();
             
-            currentQuote = (currentQuote + 1) % quotes.length;
+            // Générer les exposants
+            generateExposants();
+        });
+
+        // Initialisation de la page exposants
+        function initExposantsPage() {
+            // Animation du hero
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            const heroStats = document.querySelector('.hero-stats');
             
-            quotes[currentQuote].classList.add('active');
+            if (heroTitle) {
+                setTimeout(() => {
+                    heroTitle.classList.add('animate__fadeInDown');
+                }, 100);
+            }
+            
+            if (heroSubtitle) {
+                setTimeout(() => {
+                    heroSubtitle.classList.add('animate__fadeInUp');
+                }, 300);
+            }
+            
+            if (heroStats) {
+                setTimeout(() => {
+                    heroStats.classList.add('animate__fadeInUp');
+                }, 500);
+            }
         }
-        
-        // Changer de citation toutes les 5 secondes
-        setInterval(showNextQuote, 5000);
+
+        // Navigation responsive
+        function initNavigation() {
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    hamburger.innerHTML = navLinks.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+            }
+            
+            // Effet de scroll sur la navbar
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Filtres et recherche
+        function initFilters() {
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            const searchInput = document.getElementById('search-input');
+            
+            // Filtrage par catégorie
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Mettre à jour l'onglet actif
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filtrer les exposants
+                    filterExposants(filter);
+                });
+            });
+            
+            // Recherche en temps réel
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    filterExposantsBySearch(searchTerm);
+                });
+            }
+        }
+
+        // Basculer entre vue grille et liste
+        function initViewToggle() {
+            const viewBtns = document.querySelectorAll('.view-btn');
+            const gridView = document.getElementById('exposants-grid');
+            const listView = document.getElementById('exposants-list');
+            
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const view = this.getAttribute('data-view');
+                    
+                    // Mettre à jour le bouton actif
+                    viewBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Basculer entre les vues
+                    if (view === 'grid') {
+                        gridView.style.display = 'grid';
+                        listView.style.display = 'none';
+                    } else {
+                        gridView.style.display = 'none';
+                        listView.style.display = 'block';
+                    }
+                });
+            });
+        }
+
+        // Générer les cartes d'exposants
+        function generateExposants() {
+            const gridContainer = document.getElementById('exposants-grid');
+            const listContainer = document.getElementById('exposants-list');
+            
+            if (!gridContainer || !listContainer) return;
+            
+            // Vider les conteneurs
+            gridContainer.innerHTML = '';
+            listContainer.innerHTML = '';
+            
+            // Générer les cartes pour la vue grille
+            exposantsData.forEach(exposant => {
+                // Carte grille
+                const gridCard = createGridCard(exposant);
+                gridContainer.appendChild(gridCard);
+                
+                // Élément liste
+                const listItem = createListItem(exposant);
+                listContainer.appendChild(listItem);
+            });
+            
+            // Animation d'apparition
+            animateExposants();
+        }
+
+        // Créer une carte pour la vue grille
+        function createGridCard(exposant) {
+            const card = document.createElement('div');
+            card.className = 'exposant-card';
+            card.setAttribute('data-category', exposant.category);
+            card.setAttribute('data-name', exposant.name.toLowerCase());
+            
+            card.innerHTML = `
+                <div class="exposant-media">
+                    <img src="${exposant.image}" alt="${exposant.name}">
+                    <div class="exposant-badge">${exposant.category.toUpperCase()}</div>
+                    <div class="exposant-favorite">
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+                <div class="exposant-content">
+                    <h3 class="exposant-name">${exposant.name}</h3>
+                    <p class="exposant-description">${exposant.description}</p>
+                    <div class="exposant-specialties">
+                        ${exposant.specialties.map(specialty => 
+                            `<span class="specialty-badge">${specialty}</span>`
+                        ).join('')}
+                    </div>
+                    <div class="exposant-footer">
+                        <div class="exposant-social">
+                            <a href="${exposant.social.facebook}" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="${exposant.social.instagram}" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="${exposant.social.whatsapp}" class="social-icon" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="${exposant.social.website}" class="social-icon" aria-label="Site web"><i class="fas fa-globe"></i></a>
+                        </div>
+                        <button class="exposant-action">Voir plus</button>
+                    </div>
+                </div>
+            `;
+            
+            // Gestion des favoris
+            const favoriteBtn = card.querySelector('.exposant-favorite');
+            favoriteBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+                this.querySelector('i').classList.toggle('far');
+                this.querySelector('i').classList.toggle('fas');
+            });
+            
+            return card;
+        }
+
+        // Créer un élément pour la vue liste
+        function createListItem(exposant) {
+            const item = document.createElement('div');
+            item.className = 'exposant-list-item';
+            item.setAttribute('data-category', exposant.category);
+            item.setAttribute('data-name', exposant.name.toLowerCase());
+            
+            item.innerHTML = `
+                <div class="list-media">
+                    <img src="${exposant.image}" alt="${exposant.name}">
+                </div>
+                <div class="list-content">
+                    <div class="list-header">
+                        <h3 class="list-name">${exposant.name}</h3>
+                        <span class="list-badge">${exposant.category.toUpperCase()}</span>
+                    </div>
+                    <p class="list-description">${exposant.description}</p>
+                    <div class="exposant-specialties">
+                        ${exposant.specialties.map(specialty => 
+                            `<span class="specialty-badge">${specialty}</span>`
+                        ).join('')}
+                    </div>
+                    <div class="list-footer">
+                        <div class="exposant-social">
+                            <a href="${exposant.social.facebook}" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="${exposant.social.instagram}" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="${exposant.social.whatsapp}" class="social-icon" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="${exposant.social.website}" class="social-icon" aria-label="Site web"><i class="fas fa-globe"></i></a>
+                        </div>
+                        <button class="exposant-action">Voir plus</button>
+                    </div>
+                </div>
+            `;
+            
+            return item;
+        }
+
+        // Filtrer les exposants par catégorie
+        function filterExposants(category) {
+            const gridCards = document.querySelectorAll('.exposant-card');
+            const listItems = document.querySelectorAll('.exposant-list-item');
+            const resultsCount = document.getElementById('results-count');
+            
+            let visibleCount = 0;
+            
+            gridCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            listItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                
+                if (category === 'all' || itemCategory === category) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Mettre à jour le compteur de résultats
+            if (resultsCount) {
+                resultsCount.textContent = `${visibleCount} exposant${visibleCount > 1 ? 's' : ''}`;
+            }
+            
+            // Réanimer les éléments visibles
+            setTimeout(animateExposants, 100);
+        }
+
+        // Filtrer les exposants par recherche
+        function filterExposantsBySearch(searchTerm) {
+            const gridCards = document.querySelectorAll('.exposant-card');
+            const listItems = document.querySelectorAll('.exposant-list-item');
+            const resultsCount = document.getElementById('results-count');
+            
+            let visibleCount = 0;
+            
+            gridCards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                const description = card.querySelector('.exposant-description').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            listItems.forEach(item => {
+                const name = item.getAttribute('data-name');
+                const description = item.querySelector('.list-description').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || description.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Mettre à jour le compteur de résultats
+            if (resultsCount) {
+                resultsCount.textContent = `${visibleCount} exposant${visibleCount > 1 ? 's' : ''}`;
+            }
+            
+            // Réanimer les éléments visibles
+            setTimeout(animateExposants, 100);
+        }
+
+        // Animation d'apparition des exposants
+        function animateExposants() {
+            const gridCards = document.querySelectorAll('.exposant-card');
+            const listItems = document.querySelectorAll('.exposant-list-item');
+            
+            // Réinitialiser l'animation
+            gridCards.forEach(card => {
+                card.classList.remove('visible');
+            });
+            
+            listItems.forEach(item => {
+                item.classList.remove('visible');
+            });
+            
+            // Animer les éléments visibles
+            setTimeout(() => {
+                gridCards.forEach((card, index) => {
+                    if (card.style.display !== 'none') {
+                        setTimeout(() => {
+                            card.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+                
+                listItems.forEach((item, index) => {
+                    if (item.style.display !== 'none') {
+                        setTimeout(() => {
+                            item.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+            }, 50);
+        }
     </script>
 </body>
 </html>
